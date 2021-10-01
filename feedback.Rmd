@@ -1,0 +1,58 @@
+---
+title: "Research Away Day Breakout summary"
+author: "Emma Rand"
+date: "24/09/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+options(gargle_oauth_email = "emma.rand@york.ac.uk")
+```
+
+```{r}
+library(tidyverse)
+library(googlesheets4)
+library(tidytext)
+```
+
+```{r}
+url <- "https://docs.google.com/spreadsheets/d/1XTMw6wkvgXiefBgOFnegOl6XBLUNFZBSbx1qqo9hwu8/edit?resourcekey#gid=95266269"
+responses <- read_sheet(url, )
+```
+
+
+```{r}
+responses %>% 
+  group_by(`Which theme were you?`) %>%
+  count() %>% 
+  knitr::kable(caption = "Number of groups feeding back about each theme")
+```
+
+```{r}
+tidy_resp <- responses %>% 
+  group_by(`Which theme were you?`) %>% 
+  mutate(ans_number = row_number()) %>% 
+  ungroup() %>% 
+  unnest_tokens(word, Summary)
+```
+
+
+```{r}
+data(stop_words)
+tidy_resp <- tidy_resp %>% 
+  anti_join(stop_words)
+
+```
+
+```{r}
+tidy_resp %>%
+  group_by(`Which theme were you?`) %>% 
+  count(word, sort = TRUE) %>% 
+   filter(n > 2) %>%
+  ggplot(aes(x = n, y = word)) +
+  geom_col() + facet_wrap(.~`Which theme were you?`)
+```
+
