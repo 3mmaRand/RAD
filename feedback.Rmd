@@ -1,8 +1,10 @@
 ---
 title: "Research Away Day Breakout summary"
-author: "Emma Rand"
-date: "24/09/2021"
-output: html_document
+author: ["Emma Rand", "Pen Holland", "Jillain Barlow"]
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+  bookdown::word_document2: default
 ---
 
 ```{r setup, include=FALSE}
@@ -16,6 +18,7 @@ options(gargle_oauth_email = "emma.rand@york.ac.uk")
 library(tidyverse)
 library(googlesheets4)
 library(tidytext)
+library(wordcloud)
 ```
 
 ```{r}
@@ -42,17 +45,56 @@ tidy_resp <- responses %>%
 
 ```{r}
 data(stop_words)
-tidy_resp <- tidy_resp %>% 
+tidy_resp <- tidy_resp %>%
   anti_join(stop_words)
 
 ```
+```{r}
+tibble(Abbreivation = c("rstaff",
+                        "tsstaff",
+                        "artstaff",
+                        "techstaff"),
+       Meaning = c("Research staff",
+                   "T&S Staff",
+                   "ART Staff",
+                   "Technical Staff")) %>% 
+  knitr::kable(caption = "Key")
+```
 
+
+**A. How can all staff work together to improve the UG/PGT student research experience and outcomes?**
 ```{r}
 tidy_resp %>%
-  group_by(`Which theme were you?`) %>% 
-  count(word, sort = TRUE) %>% 
-   filter(n > 2) %>%
-  ggplot(aes(x = n, y = word)) +
-  geom_col() + facet_wrap(.~`Which theme were you?`)
+  filter(`Which theme were you?` == "A. How can all staff work together to improve the UG/PGT student research experience and outcomes?") %>% 
+  count(word) %>% 
+  with(wordcloud(word, n,
+                 min.freq = 2,
+                 max.words = 100,
+                 colors = brewer.pal(8, "Dark2")))
 ```
+
+
+**B. How can all staff work together to improve professional training programmes?**
+```{r}
+tidy_resp %>%
+  filter(`Which theme were you?` == "B. How can all staff work together to improve professional training programmes?") %>% 
+  count(word) %>% 
+  with(wordcloud(word, n, 
+                 min.freq = 1,
+                 max.words = 100, 
+                 colors = brewer.pal(8, "Dark2")))
+```
+
+**C. Strategically, how do we create more interactions between staff groups?**
+```{r}
+tidy_resp %>%
+  filter(`Which theme were you?` == "C. Strategically, how do we create more interactions between staff groups?") %>% 
+  count(word) %>% 
+  with(wordcloud(word, n,
+                 min.freq = 1,
+                 max.words = 100,
+                 colors = brewer.pal(8, "Dark2")))
+```
+
+
 
