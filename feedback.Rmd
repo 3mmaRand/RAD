@@ -17,38 +17,48 @@ options(gargle_oauth_email = "emma.rand@york.ac.uk")
 ```{r}
 library(tidyverse)
 library(googlesheets4)
-library(tidytext)
-library(wordcloud)
+library(kableExtra)
 ```
 
 ```{r}
 url <- "https://docs.google.com/spreadsheets/d/1XTMw6wkvgXiefBgOFnegOl6XBLUNFZBSbx1qqo9hwu8/edit?resourcekey#gid=95266269"
 responses <- read_sheet(url, )
 ```
+# Summary of responses
 
 
 ```{r}
-responses %>% 
+response_summary <- responses %>% 
   group_by(`Which theme were you?`) %>%
-  count() %>% 
-  knitr::kable(caption = "Number of groups feeding back about each theme")
+  count()  
+response_summary$summary = c("Research Staff already do a lot of supervison on behalf of their PIs. Make this 'official' to recognise post-doc contribution, provide training in supervision and info about ug degree programmes and esp projects, send student feedback to research staff supervisors. More advice of use of teaching facilities for projects. Possible bulk training in lab techniques for project students. Requires PI support. Requests for training in R/bioinformatics for post-docs to faciliate project supervison in these areas. Requests for systems/event to link up T&S and Reaseach staff -  database? More events like this. Recognise different models of co-supervision. Praise for new studentship scheme - expand, help with identifying funding sources for post-docs wishing to offer summer placments. Document ug contributions research.",
+                             "This theme was sometimes interpreted as 'what training do our post-docs want'. Bioinformatics, programming, practical demos of advanced techniques, bespoke training. Other suggestions were to increase the events like this where staff mix and an increase in phd student-led and post-doc-led events; have a system to help people find each other/key skills. post-docs could/would like be invloved in training delivery but need PI support and recognition. ",
+                             "More events like this, more socials and research events that 'force' people to mix. Buddy system? Shadowing in both both directions? Meet ups of all sci comms ug project staff and students Put post events in departmental calender, rebadge as socials with posters? More structured events for technical staff. Pump priming to promote interaction (1-2k for across-staff projects). Expand summer studentship programme with 1 or 2 projects dedicated to staff group collaborations.. One suggestion that T&S staff should run ART staff projects")
 ```
 
 ```{r}
-tidy_resp <- responses %>% 
-  group_by(`Which theme were you?`) %>% 
-  mutate(ans_number = row_number()) %>% 
-  ungroup() %>% 
-  unnest_tokens(word, Summary)
+resp <- response_summary$`Which theme were you?`
+groups <- sum(response_summary$n)
 ```
+
+Feedback was received from `r groups` groups on three themes:: `r resp`   
+
+
 
 
 ```{r}
-data(stop_words)
-tidy_resp <- tidy_resp %>%
-  anti_join(stop_words)
-
+response_summary %>% 
+  knitr::kable(caption = "Theme summaries",
+               col.names = c("Theme", "Number of groups", "Summary of discussion"),
+               align = c("l", "c", "l")) %>% 
+  column_spec(1, width = "30%") %>% 
+  column_spec(2, width = "20%") %>% 
+  column_spec(3, width = "50%") 
+                        
 ```
+
+# Wordclouds
+
 ```{r}
 tibble(Abbreivation = c("rstaff",
                         "tsstaff",
@@ -58,42 +68,26 @@ tibble(Abbreivation = c("rstaff",
                    "T&S Staff",
                    "ART Staff",
                    "Technical Staff")) %>% 
-  knitr::kable(caption = "Key")
+  knitr::kable(caption = "Key") %>% 
+  column_spec(1, width = "30%" ) %>% 
+  column_spec(2, width = "30%")
 ```
 
 
-**A. How can all staff work together to improve the UG/PGT student research experience and outcomes?**
+## A. How can all staff work together to improve the UG/PGT student research experience and outcomes?
 ```{r}
-tidy_resp %>%
-  filter(`Which theme were you?` == "A. How can all staff work together to improve the UG/PGT student research experience and outcomes?") %>% 
-  count(word) %>% 
-  with(wordcloud(word, n,
-                 min.freq = 2,
-                 max.words = 100,
-                 colors = brewer.pal(8, "Dark2")))
+knitr::include_graphics("figs/A.png")
 ```
 
 
-**B. How can all staff work together to improve professional training programmes?**
+## B. How can all staff work together to improve professional training programmes?
 ```{r}
-tidy_resp %>%
-  filter(`Which theme were you?` == "B. How can all staff work together to improve professional training programmes?") %>% 
-  count(word) %>% 
-  with(wordcloud(word, n, 
-                 min.freq = 1,
-                 max.words = 100, 
-                 colors = brewer.pal(8, "Dark2")))
+knitr::include_graphics("figs/B.png")
 ```
 
-**C. Strategically, how do we create more interactions between staff groups?**
+## C. Strategically, how do we create more interactions between staff groups?
 ```{r}
-tidy_resp %>%
-  filter(`Which theme were you?` == "C. Strategically, how do we create more interactions between staff groups?") %>% 
-  count(word) %>% 
-  with(wordcloud(word, n,
-                 min.freq = 1,
-                 max.words = 100,
-                 colors = brewer.pal(8, "Dark2")))
+knitr::include_graphics("figs/C.png")
 ```
 
 
