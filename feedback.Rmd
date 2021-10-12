@@ -74,18 +74,18 @@ tibble(Abbreivation = c("rstaff",
 ```
 
 
-## A. How can all staff work together to improve the UG/PGT student research experience and outcomes?
+## A. How can all staff work together to improve the UG/PGT student research experience and outcomes? {-}
 ```{r}
 knitr::include_graphics("figs/A.png")
 ```
 
 
-## B. How can all staff work together to improve professional training programmes?
+## B. How can all staff work together to improve professional training programmes?  {-}
 ```{r}
 knitr::include_graphics("figs/B.png")
 ```
 
-## C. Strategically, how do we create more interactions between staff groups?
+## C. Strategically, how do we create more interactions between staff groups?  {-}
 ```{r}
 knitr::include_graphics("figs/C.png")
 ```
