@@ -1,6 +1,6 @@
 ---
 title: "Research Away Day Breakout summary"
-author: ["Emma Rand", "Pen Holland", "Jillain Barlow"]
+author: ["Emma Rand", "Pen Holland", "Jillian Barlow"]
 output:
   bookdown::html_document2: default
   bookdown::pdf_document2: default
@@ -24,16 +24,14 @@ library(kableExtra)
 url <- "https://docs.google.com/spreadsheets/d/1XTMw6wkvgXiefBgOFnegOl6XBLUNFZBSbx1qqo9hwu8/edit?resourcekey#gid=95266269"
 responses <- read_sheet(url, )
 ```
-# Summary of responses
-
 
 ```{r}
 response_summary <- responses %>% 
   group_by(`Which theme were you?`) %>%
   count()  
-response_summary$summary = c("Research Staff already do a lot of supervison on behalf of their PIs. Make this 'official' to recognise post-doc contribution, provide training in supervision and info about ug degree programmes and esp projects, send student feedback to research staff supervisors. More advice of use of teaching facilities for projects. Possible bulk training in lab techniques for project students. Requires PI support. Requests for training in R/bioinformatics for post-docs to faciliate project supervison in these areas. Requests for systems/event to link up T&S and Reaseach staff -  database? More events like this. Recognise different models of co-supervision. Praise for new studentship scheme - expand, help with identifying funding sources for post-docs wishing to offer summer placments. Document ug contributions research.",
-                             "This theme was sometimes interpreted as 'what training do our post-docs want'. Bioinformatics, programming, practical demos of advanced techniques, bespoke training. Other suggestions were to increase the events like this where staff mix and an increase in phd student-led and post-doc-led events; have a system to help people find each other/key skills. post-docs could/would like be invloved in training delivery but need PI support and recognition. ",
-                             "More events like this, more socials and research events that 'force' people to mix. Buddy system? Shadowing in both both directions? Meet ups of all sci comms ug project staff and students Put post events in departmental calender, rebadge as socials with posters? More structured events for technical staff. Pump priming to promote interaction (1-2k for across-staff projects). Expand summer studentship programme with 1 or 2 projects dedicated to staff group collaborations.. One suggestion that T&S staff should run ART staff projects")
+response_summary$summary = c("<ul><li>Research Staff already do a lot of supervison on behalf of their PIs. Make this 'official' to recognise post-doc contribution, provide training in supervision and info about ug degree programmes and esp projects, send student feedback to research staff supervisors.</li><li> More advice of use of teaching facilities for projects.</li><li> Possible bulk training in lab techniques for project students.</li><li> Requires PI support.</li><li> Requests for training in R/bioinformatics for post-docs to faciliate project supervison in these areas.</li><li> Requests for systems/event to link up T&S and Reaseach staff -  database?</li><li> More events like this.</li><li> Recognise different models of co-supervision.</li><li> Praise for new studentship scheme - expand, help with identifying funding sources for post-docs wishing to offer summer placments.</li><li> Document ug contributions research.</li></ul>",
+                             "<ul><li>This theme was sometimes interpreted as 'what training do our post-docs want'.</li><li> Bioinformatics, programming, practical demos of advanced techniques, bespoke training.</li><li> Other suggestions were to increase the events like this where staff mix and an increase in phd student-led and post-doc-led events.</li><li>Have a system to help people find each other/key skills.</li><li> Post-docs could/would like be invloved in training delivery but need PI support and recognition.</li></ul>",
+                             "<ul><li>More events like this, more socials and research events that 'force' people to mix.</li><li> Buddy system? Shadowing in both both directions? </li><li>Meet ups of all sci comms ug project staff and students.</li><li> Put post events in departmental calender, rebadge as socials with posters?</li><li> More structured events for technical staff.</li><li> Pump priming to promote interaction (1-2k for across-staff projects).</li><li> Expand summer studentship programme with 1 or 2 projects dedicated to staff group collaborations.</li><li> One suggestion that T&S staff should run ART staff projects</li></ul>")
 ```
 
 ```{r}
@@ -41,14 +39,33 @@ resp <- response_summary$`Which theme were you?`
 groups <- sum(response_summary$n)
 ```
 
-Feedback was received from `r groups` groups on three themes:: `r resp`   
 
+# Introduction
+
+The Research Away on 22 September 2021 included breakout sessions that focussed on how to facilitate and improve research interactions between staff groups.  The break out sessions were introduced by Jillian Barlow, Emma Rand and Pen Holland who outlined some of the collaboratives projects they have been involved with. The slides for the introduction are here: [RAD Breakout](RAD Breakout.pdf)
+
+Very many thanks to everyone for their willingness to contribute to discussions and especially to our group facilitators.
+
+Feedback was received from `r groups` groups on three themes: `r resp`.
+
+
+# Recommendations
+
+-  Arrange more random research and teaching events like the Away Day breakout sessions, to facilitate mixing across staff -  groups to brainstorm ideas and just chat
+-  Review the induction and mentoring for new staff to facilitate more introductions and developing relationships across -  staff groups
+-  Provide departmental pump priming to promote research and training interactions across groups developing new -  collaborations (could tie into the summer studentship scheme)
+-  Support and expand the summer studentship schemes for UG, including funding and training for post-docs to participate as -  supervisors, and inter/multi-disciplinary projects crossing staff/lab groups
+-  Develop structures by which post-docs can offer UG projects (especially stage 4 IM), with support from academic staff as a co-supervisor (ART or T&S), and recognition in workloads and pay (like GTA+ or contract variation)
+-  Provide get-together sessions for e.g. all sci comm students and their directors, data science students and their -  directors, etc.
+
+
+# Summary of responses
 
 
 
 ```{r}
 response_summary %>% 
-  knitr::kable(caption = "Theme summaries",
+  knitr::kable(caption = "Theme summaries", escape = F,
                col.names = c("Theme", "Number of groups", "Summary of discussion"),
                align = c("l", "c", "l")) %>% 
   column_spec(1, width = "30%") %>% 
@@ -73,22 +90,20 @@ tibble(Abbreivation = c("rstaff",
   column_spec(2, width = "30%")
 ```
 
+## A. How can all staff work together to improve the UG/PGT student research experience and outcomes? {.unnumbered}
 
-## A. How can all staff work together to improve the UG/PGT student research experience and outcomes? {-}
 ```{r}
 knitr::include_graphics("figs/A.png")
 ```
 
+## B. How can all staff work together to improve professional training programmes? {.unnumbered}
 
-## B. How can all staff work together to improve professional training programmes?  {-}
 ```{r}
 knitr::include_graphics("figs/B.png")
 ```
 
-## C. Strategically, how do we create more interactions between staff groups?  {-}
+## C. Strategically, how do we create more interactions between staff groups? {.unnumbered}
+
 ```{r}
 knitr::include_graphics("figs/C.png")
 ```
-
-
-
