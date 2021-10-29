@@ -49,14 +49,16 @@ Very many thanks to everyone for their willingness to contribute to discussions 
 Feedback was received from `r groups` groups on three themes: `r resp`.
 
 
-# Recommendations
+# Recommendations based on feedback
 
--  Arrange more random research and teaching events like the Away Day breakout sessions, to facilitate mixing across staff -  groups to brainstorm ideas and just chat
--  Review the induction and mentoring for new staff to facilitate more introductions and developing relationships across -  staff groups
--  Provide departmental pump priming to promote research and training interactions across groups developing new -  collaborations (could tie into the summer studentship scheme)
--  Support and expand the summer studentship schemes for UG, including funding and training for post-docs to participate as -  supervisors, and inter/multi-disciplinary projects crossing staff/lab groups
--  Develop structures by which post-docs can offer UG projects (especially stage 4 IM), with support from academic staff as a co-supervisor (ART or T&S), and recognition in workloads and pay (like GTA+ or contract variation)
--  Provide get-together sessions for e.g. all sci comm students and their directors, data science students and their -  directors, etc.
+Proposed committee for consideration/action in brackets.
+
+-  Arrange more random research and teaching events like the Away Day breakout sessions, to facilitate mixing across staff -  groups to brainstorm ideas and just chat. (DMT)
+-  Review the induction and mentoring for new staff to facilitate more introductions and developing relationships across -  staff groups. (DMT)
+-  Provide departmental pump priming to promote research and training interactions across groups developing new -  collaborations (could tie into the summer studentship scheme). (DRC)
+-  Support and expand the summer studentship schemes for UG, including funding and training for post-docs to participate as -  supervisors, and inter/multi-disciplinary projects crossing staff/lab groups. (DRC, TC)
+-  Develop structures by which post-docs can offer UG projects (especially stage 4 IM), with support from academic staff as a co-supervisor (ART or T&S), and recognition in workloads and pay (like GTA+ or contract variation). (DMT, TC)
+-  Provide get-together sessions for e.g. all sci comm students and their directors, data science students and their -  directors, etc. (TC)
 
 
 # Summary of responses
